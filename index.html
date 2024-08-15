@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silvio Santos - Top 5 Mais Vistos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Samba&display=swap');
+
+        body {
+            font-family: 'Samba', cursive;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4caf50, #2196f3);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+            margin-bottom: 20px;
+            transition: background 0.5s;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        .profile-name {
+            font-size: 1.5em;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .profile-selection {
+            margin: 10px 0;
+        }
+
+        .video-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .video-item {
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .video-item img {
+            width: 150px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .video-details {
+            display: none;
+            text-align: center;
+            margin: 20px;
+            padding: 15px;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        iframe {
+            display: block;
+            margin: 10px auto;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .link {
+            color: #4caf50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Silvio Santos</h1>
+        <div class="profile-name" id="profileDisplay">Nome do Perfil</div>
+        <div class="profile-selection">
+            <input type="text" id="profileName" placeholder="Digite seu nome de perfil">
+            <select id="gradientChoice" onchange="changeGradient()">
+                <option value="default">Escolha o gradiente do painel</option>
+                <option value="green-blue" selected>Verde e Azul</option>
+                <option value="green-yellow">Verde e Amarelo</option>
+                <option value="blue-white">Azul e Branco</option>
+                <option value="purple-yellow">Roxo e Amarelo</option>
+                <option value="red-orange">Vermelho e Laranja</option>
+            </select>
+            <button onclick="applySettings()">Aplicar</button>
+        </div>
+    </header>
+
+    <section class="video-list">
+        <h2>Top 5 Mais Vistos</h2>
+        <div class="video-item" onclick="showDetails(1)">
+            <img src="video_cover_1.jpg" alt="Vídeo 1">
+            <p>Vídeo 1</p>
+        </div>
+        <div class="video-item" onclick="showDetails(2)">
+            <img src="video_cover_2.jpg" alt="Vídeo 2">
+            <p>Vídeo 2</p>
+        </div>
+        <div class="video-item" onclick="showDetails(3)">
+            <img src="video_cover_3.jpg" alt="Vídeo 3">
+            <p>Vídeo 3</p>
+        </div>
+        <div class="video-item" onclick="showDetails(4)">
+            <img src="video_cover_4.jpg" alt="Vídeo 4">
+            <p>Vídeo 4</p>
+        </div>
+        <div class="video-item" onclick="showDetails(5)">
+            <img src="video_cover_5.jpg" alt="Vídeo 5">
+            <p>Vídeo 5</p>
+        </div>
+    </section>
+
+    <section class="video-details" id="videoDetails">
+        <h2 id="videoTitle">Detalhes do Vídeo</h2>
+        <img id="videoImage" src="" alt="" width="300">
+        <p id="videoDescription"></p>
+        <iframe id="videoIframe" width="560" height="315" src="" title="Vídeo" frameborder="0" allowfullscreen></iframe>
+        <button onclick="hideDetails()">Voltar</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Site sobre Silvio Santos</p>
+        <p><a href="https://veja.abril.com.br/coluna/veja-gente/a-dura-verdade-sobre-silvio-santos-que-publico-nao-se-conforma-em-aceitar" class="link" target="_blank">Leia mais sobre Silvio Santos</a></p>
+    </footer>
+
+    <script>
+        function applySettings() {
+            const profileName = document.getElementById('profileName').value;
+            document.getElementById('profileDisplay').innerText = profileName || "Nome do Perfil";
+        }
+
+        function changeGradient() {
+            const gradientChoice = document.getElementById('gradientChoice').value;
+            const header = document.querySelector('header');
+
+            switch (gradientChoice) {
+                case 'green-blue':
+                    header.style.background = 'linear-gradient(90deg, #4caf50, #2196f3)';
+                    break;
+                case 'green-yellow':
+                    header.style.background = 'linear-gradient(90deg, #4caf50, #ffeb3b)';
+                    break;
+                case 'blue-white':
+                    header.style.background = 'linear-gradient(90deg, #2196f3, #ffffff)';
+                    break;
+                case 'purple-yellow':
+                    header.style.background = 'linear-gradient(90deg, #9c27b0, #ffeb3b)';
+                    break;
+                case 'red-orange':
+                    header.style.background = 'linear-gradient(90deg, #f44336, #ff9800)';
+                    break;
+                default:
+                    header.style.background = 'linear-gradient(90deg, #4caf50, #2196f3)';
+                    break;
+            }
+        }
+
+        function showDetails(videoId) {
+            const titles = ["Vídeo 1", "Vídeo 2", "Vídeo 3", "Vídeo 4", "Vídeo 5"];
+            const descriptions = [
+                "Descrição do Vídeo 1: Este é um vídeo incrível sobre Silvio Santos.",
+                "Descrição do Vídeo 2: Um momento inesquecível da carreira dele.",
+                "Descrição do Vídeo 3: Silvio Santos em ação.",
+                "Descrição do Vídeo 4: Os melhores momentos do programa.",
+                "Descrição do Vídeo 5: Uma entrevista exclusiva."
+            ];
+            const images = [
+                "video_cover_1.jpg",
+                "video_cover_2.jpg",
+                "video_cover_3.jpg",
+                "video_cover_4.jpg",
+                "video_cover_5.jpg"
+            ];
+            const videoLinks = [
+                "https://www.youtube.com/embed/VIDEO_ID_1",
+                "https://www.youtube.com/embed/VIDEO_ID_2",
+                "https://www.youtube.com/embed/VIDEO_ID_3",
+                "https://www.youtube.com/embed/VIDEO_ID_4",
+                "https://www.youtube.com/embed/VIDEO_ID_5"
+            ];
+
+            document.getElementById('videoTitle').innerText = titles[videoId - 1];
+            document.getElementById('videoDescription').innerText = descriptions[videoId - 1];
+            document.getElementById('videoImage').src = images[videoId - 1];
+            document.getElementById('videoIframe').src = videoLinks[videoId - 1];
+
+            document.querySelector('.video-list').style.display = 'none';
+            document.querySelector('.video-details').style.display = 'block';
+        }
+
+        function hideDetails() {
+            document.querySelector('.video-list').style.display = 'flex';
+            document.querySelector('.video-details').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
